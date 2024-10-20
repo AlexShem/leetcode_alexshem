@@ -1,22 +1,12 @@
-from collections import deque
+from itertools import groupby
 from typing import List
 
 
-# TODO: Problem not Solved
 def capture_forts(forts: List[int]) -> int:
-    stack = deque()
-    captures_sum = set()
-    captures = 0
-    for i, fort in enumerate(forts):
-        if fort == -1:
-            stack.append(i)
-            continue
-        if fort == 0:
-            captures += 1
-            continue
-        if fort == 1:
-            if len(stack):
-                captures_sum.add(captures)
-                captures = 0
-                stack.pop()
-    return max(captures_sum)
+    grp = [(k, len(list(g))) for k, g in groupby(forts)]
+    out = 0
+
+    for i in range(1, len(grp) - 1):
+        if grp[i - 1][0] * grp[i + 1][0] == -1:
+            out = max(out, grp[i][1])
+    return out
