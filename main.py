@@ -1,5 +1,5 @@
 # Ensure the correct path to the test module
-from tests.test_242_valid_anagram import test, NUMBER_OF_TESTS
+from tests.test_2574_left_right_difference import test, NUMBER_OF_TESTS
 
 
 def run_all_tests():
