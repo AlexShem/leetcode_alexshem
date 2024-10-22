@@ -1,4 +1,4 @@
-from tests.test_2363_merge_similar_items import test, NUMBER_OF_TESTS
+from tests.test_128_longest_consecutive import test, NUMBER_OF_TESTS
 
 
 def run_all_tests():
