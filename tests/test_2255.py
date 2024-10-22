@@ -1,4 +1,4 @@
-from problem_list._2255_count_prefixes import count_prefixes
+from problem_list.problem_2255 import count_prefixes
 
 NUMBER_OF_TESTS = 2
 

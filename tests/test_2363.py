@@ -1,4 +1,4 @@
-from problem_list._2363_merge_similar_items import merge_similar_items
+from problem_list.problem_2363 import merge_similar_items
 
 NUMBER_OF_TESTS = 3
 

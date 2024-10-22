@@ -1,4 +1,4 @@
-from problem_list._2511_capture_forts import capture_forts
+from problem_list.problem_2511 import capture_forts
 
 NUMBER_OF_TESTS = 4
 

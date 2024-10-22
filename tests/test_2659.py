@@ -1,4 +1,4 @@
-from problem_list._2659_count_operations_to_empty_array import count_operations_to_empty_array
+from problem_list.problem_2659 import count_operations_to_empty_array
 
 NUMBER_OF_TESTS = 4
 

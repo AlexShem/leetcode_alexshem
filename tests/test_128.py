@@ -1,4 +1,4 @@
-from problem_list._128_longest_consecutive import longest_consecutive
+from problem_list.problem_128 import longest_consecutive
 
 NUMBER_OF_TESTS = 5
 

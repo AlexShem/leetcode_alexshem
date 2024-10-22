@@ -1,4 +1,4 @@
-from problem_list._2574_left_right_difference import left_right_difference
+from problem_list.problem_2574 import left_right_difference
 
 NUMBER_OF_TESTS = 2
 
