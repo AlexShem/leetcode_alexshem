@@ -2,6 +2,7 @@ from typing import List
 from collections import deque
 
 
+# TODO: 2659 - Understand the problem's solution and implement it
 def count_operations_to_empty_array(nums: List[int]) -> int:
     min_values = set(nums)
     que = deque(nums)
