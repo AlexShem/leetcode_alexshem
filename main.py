@@ -1,4 +1,4 @@
-from tests.test_1365 import test, NUMBER_OF_TESTS
+from tests.test_1386 import test, NUMBER_OF_TESTS
 
 
 def run_all_tests():
