@@ -1,8 +1,9 @@
 def smaller_numbers_than_current(nums: list[int]) -> list[int]:
-    result = [0] * len(nums)
+    nums_sorted = sorted(nums)
 
-    for i, num in enumerate(nums):
-        lower = [n for n in nums if n < num]
-        result[i] = len(lower)
-
-    return result
+    mapping = {}
+    for i, num in enumerate(nums_sorted):
+        if num not in mapping:
+            mapping[num] = i
+    
+    return [mapping[num] for num in nums]
