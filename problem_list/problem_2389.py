@@ -1,19 +1,12 @@
 from bisect import bisect_right
+from itertools import accumulate
 
 
 def answer_queries(nums: list[int], queries: list[int]) -> list[int]:
     nums.sort()
-    answer = [0] * len(queries)
-    cum_sums = [0] * len(nums)
-    cum_sums[0] = nums[0]
-    for i in range(1, len(nums)):
-        cum_sums[i] = cum_sums[i - 1] + nums[i]
+    cum_sums = list(accumulate(nums))
 
-    for i, q in enumerate(queries):
-        idx = bisect_right(cum_sums, q)
-        answer[i] = idx
-
-    return answer
+    return [bisect_right(cum_sums, q) for q in queries]
 
 
 # nums = [4, 5, 2, 1]
