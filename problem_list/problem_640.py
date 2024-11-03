@@ -1,84 +1,64 @@
 def solve_equation(equation: str) -> str:
-    def split_terms(expression: str) -> list[str]:
+    # Helper function to split and collect coefficients from an expression
+    def collect_coefficients(expression: str) -> (int, int):
         terms = []
-        term = "+"
-        # Special treatment of the first character:
-        # If it is a unary sign ('-')
-        if expression[0] == '-':
-            term = '-'
-            expression = expression[1:]
-
+        term = ""
         for char in expression:
-            if char == '+' or char == '-':
-                terms.append(term)
+            if char in "+-":
+                if term:
+                    terms.append(term)
                 term = char
             else:
                 term += char
         terms.append(term)
-        return terms
 
-    def collect_terms(terms: list[str]) -> list[str]:
         x_coefficient = 0
         constant = 0
+
         for term in terms:
-            x_index = term.find("x")
-            if x_index == 0:
-                x_coefficient += 1
-            elif x_index == 1:  # "2x" or "+x" or "-x"
-                coefficient = term[0]
-                if coefficient == '+':
+            if "x" in term:
+                if term == "x" or term == "+x":
                     x_coefficient += 1
-                elif coefficient == '-':
+                elif term == "-x":
                     x_coefficient -= 1
                 else:
-                    x_coefficient += int(coefficient)
-            elif x_index > 1:
-                x_coefficient += int(term[:x_index])
+                    x_coefficient += int(term.replace("x", ""))
             else:
                 constant += int(term)
 
-        term_x = "+" + str(x_coefficient) + "x" if x_coefficient >= 0 else str(x_coefficient) + "x"
-        term_const = "+" + str(constant) if constant >= 0 else str(constant)
-        return [term_x, term_const]
+        return x_coefficient, constant
 
+    # Split equation into LHS and RHS
     lhs, rhs = equation.split('=')
-    lhs_terms = split_terms(lhs)
-    rhs_terms = split_terms(rhs)
-    lhs_terms = collect_terms(lhs_terms)
-    rhs_terms = collect_terms(rhs_terms)
+    lhs_x, lhs_const = collect_coefficients(lhs)
+    rhs_x, rhs_const = collect_coefficients(rhs)
 
-    # Move all "x" terms to left and all contant terms to right
-    coefficient_x = int(lhs_terms[0].replace("x", "")) - int(rhs_terms[0].replace("x", ""))
-    coefficient_c = int(rhs_terms[1]) - int(lhs_terms[1])
+    # Bring all x terms to the left and constants to the right
+    total_x = lhs_x - rhs_x
+    total_const = rhs_const - lhs_const
 
-    # Check if the solution exist
-    if coefficient_x == 0:
-        if coefficient_c == 0:
+    # Determine the solution
+    if total_x == 0:
+        if total_const == 0:
             return "Infinite solutions"
         else:
             return "No solution"
 
-    # Check that the solution is an integer
-    if coefficient_c % coefficient_x != 0:
-        return "No solution"
-
-    x_solution = coefficient_c // coefficient_x
-
-    return "x=" + str(x_solution)
+    # Calculate the value of x
+    x_value = total_const // total_x
+    return f"x={x_value}"
 
 
+# Testing the function
 if __name__ == "__main__":
     # Test 1
     eq = "x+5-3+x=6+x-2"
-    # Output: "x=2"
-    print(solve_equation(eq))
+    print(solve_equation(eq))  # Output: "x=2"
 
     # Test 2
     eq = "x=x"
-    # Output: "Infinite solutions"
-    print(solve_equation(eq))
+    print(solve_equation(eq))  # Output: "Infinite solutions"
 
     # Test 3
     eq = "2x=x"
-    # Output: "x=0"
-    print(solve_equation(eq))
+    print(solve_equation(eq))  # Output: "x=0"
