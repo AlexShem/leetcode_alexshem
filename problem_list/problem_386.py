@@ -1,19 +1,18 @@
 def lexical_order(n: int) -> list[int]:
-    def dfs(current: int, out: list[int]) -> None:
+    def dfs(current: int) -> None:
         if current > n:
             return
-        out.append(current)
+        result.append(current)
 
         for k in range(10):
             next_value = current * 10 + k
             if next_value > n:
                 return
-            dfs(next_value, out)
+            dfs(next_value)
 
     result: list[int] = []
-    for i in range(1, 10):
-        dfs(i, result)
-
+    for val in range(1, 10):
+        dfs(val)
     return result
 
 
